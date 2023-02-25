@@ -10,6 +10,9 @@ import io.javalin.Javalin;
  */
 public class JavalinSingleton {
 
+    public static void main (String [] args){
+
+    }
     public static Javalin getInstance(){
         Javalin app = Javalin.create();
         ObjectMapper om = new ObjectMapper();
@@ -23,6 +26,9 @@ public class JavalinSingleton {
         app.post("/echo", ctx -> {
             
             //implement logic here
+            String song = ctx.body();
+            Song son1 = om.readValue(song, Song.class);
+            ctx.json(son1);
                 
         });
 
@@ -36,6 +42,10 @@ public class JavalinSingleton {
         app.post("/changeartisttobeatles", ctx -> {
 
             //implement logic here
+            String song = ctx.body();
+            Song newSong = om.readValue(song, Song.class);
+            newSong.setArtistName("Beatles");
+            ctx.json(newSong);
                
         });
 
